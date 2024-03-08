@@ -1,0 +1,117 @@
+## TweenAnimation
+    - it means, a linear interpolation between a beginning and ending value.
+    - The term "Tween" stands for "in-between," and it represents the range of values over which an animation will occur.
+    # key Components:
+        1. Tween class:
+            - The Tween class defines a range of values that the animation will interpolate between. 
+              It takes a begin value and an end value. The type of values can be numbers, colors, or 
+              any class that implements the interpolation logic.
+              * syntax: Tween<double> myTween = Tween<double>(begin: 0.0, end: 1.0);
+        
+        2. TweenAnimationBuilder:
+            - The TweenAnimationBuilder widget is used to build an animation by providing a Tween
+              and a builder function.
+            - The builder function is called for each frame of the animation,
+              and it receives the current value of the animation (interpolated by the Tween).
+            - example:
+            TweenAnimationBuilder(
+                tween: myTween,
+                duration: Duration(seconds: 1),
+                builder: (BuildContext context, double value, Widget? child) {
+                    // The builder function receives the current value of the animation.
+                    // Use this value to update the UI.
+                    return Container(
+                    width: value * 100, // Adjust the width based on the animation value.
+                    height: 100,
+                    color: Colors.blue,
+                    );
+                },
+            )
+        
+        3. Controller and Animation:
+            - To control the animation, you can use an "AnimationController".
+            - The controller manages the animation's lifecycle and provides methods to 
+              start, stop, or reverse the animation.
+            - example:
+            AnimationController controller = AnimationController(
+                duration: Duration(seconds: 1),
+                vsync: this, // Specify a TickerProvider (e.g., State) for vsync.
+            );
+            Animation<double> animation = myTween.animate(controller);
+            where,
+            * controller.forward() - starts animation
+            * Controller.reverse() - change directions
+        
+        4. Listening to Animation Status:
+            - You can also listen to the status of the animation using 
+              the "addStatusListener" method of the controller.
+            - example:
+            controller.addStatusListener((status) {
+                if (status == AnimationStatus.completed) {
+                    // Animation completed
+                } else if (status == AnimationStatus.dismissed) {
+                    // Animation dismissed (reversed to the beginning)
+                }
+            });
+            *note: Remember to dispose of the AnimationController when it's no longer needed to prevent memory leaks.
+        
+        # TickerProvider:
+            - a TickerProvider is an interface that provides a Ticker for animations. 
+            - The Ticker is responsible for scheduling the animation to be updated on each frame.
+            - example:
+            import 'package:flutter/material.dart';
+
+            class MyAnimatedWidget extends StatefulWidget {
+                @override
+                _MyAnimatedWidgetState createState() => _MyAnimatedWidgetState();
+                }
+
+                class _MyAnimatedWidgetState extends State<MyAnimatedWidget> with TickerProviderStateMixin {
+                late AnimationController _controller;
+                late Animation<double> _animation;
+
+                @override
+                void initState() {
+                    super.initState();
+
+                    // Create an AnimationController with this TickerProvider
+                    _controller = AnimationController(
+                    duration: Duration(seconds: 1),
+                    vsync: this, // this refers to the TickerProvider
+                    );
+
+                    // Create an Animation using the controller and a Tween
+                    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+
+                    // Start the animation
+                    _controller.forward();
+                }
+
+                @override
+                Widget build(BuildContext context) {
+                    return AnimatedBuilder(
+                    animation: _animation,
+                    builder: (context, child) {
+                        // Use the animated value to update the UI
+                        return Opacity(
+                        opacity: _animation.value,
+                        child: Container(
+                            width: 100,
+                            height: 100,
+                            color: Colors.blue,
+                        ),
+                        );
+                    },
+                    );
+                }
+
+                @override
+                void dispose() {
+                    // Dispose of the AnimationController to free up resources
+                    _controller.dispose();
+                    super.dispose();
+                }
+            }
+
+
+

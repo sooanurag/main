@@ -1,0 +1,42 @@
+convert: json to dart
+  - website : https://app.quicktype.io/?l=dart
+
+Define: Response format, json and xml.
+    - simple text file, whole thing is a String.
+    - JSON (JavaScript Object Notation), stores data in key-value pair.
+    - used for transmitting data between a server and a web or mobile application.
+    - JSON consists of two main data structures: json objects {} and arrays[].
+    - support int, double, bool, string, null.
+    - JSON doesn't support comments.
+    - Special characters within strings need to be escaped using a backslash \,
+      such as \" for double quotes or \\ for a single backslash. 
+
+Syntax:
+    {
+        'key' : value,
+        'key2' : value2
+    }
+    - whole enclosed thing is called json object.
+
+Using Response Formats in Flutter:
+    - parse the response using libraries like dart:convert to 
+      extract the data and work with it in your app.
+      i.e., import 'dart:convert'
+            final decodedData = json.decode(responseBody);
+            //now we can access useing key
+            final username = decodedData['name'];
+    - json.decode : parse a JSON string into Dart objects. allows you to quickly 
+      work with JSON data without explicitly creating models.
+    * if json file consists a single json object then json.decode() return a Map<String,dynamic>.
+    * if its a list of json object then, List<Map<String,dynamic>>
+    - json.encode() reutns a String.
+
+    * use of seperate models: consider as good practice
+        - provide Type Safety(helps catch errors), Code Readability, 
+          Serialization/Deserialization, Easier Data Manipulation(access 
+          and change data in the model), Scalability(helps consistent in large projects).
+
+        - Libraries like json_serializable and freezed can help automate 
+          the process of creating models from JSON data.
+
+

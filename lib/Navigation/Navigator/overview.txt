@@ -1,0 +1,94 @@
+- a class that manages routes in a stack.
+- Navigator class can be accessed using "Navigator.of(context)".
+
+# terms : 
+    (1) screen & pages => routes
+    (2) Android : Activity & IOS : ViewController
+
+- Navigator.of(context).push() =>
+    (1) push new route in stack,
+    (2) takes a Route object (usually a MaterialPageRoute) as an argument.
+- Navigator.of(context).pop() =>
+    (1) pop the current route off the stack,
+    (2) can pass data : " Navigator.of(context).pop(data); ".
+- Navigator.of(context).popUntil((route) => route.isFirst);
+    - pop all routes from stack util first one in stack.
+    - it have isFirst, isAcive, isCurrent, etc.
+- Navigator.of(context).pushReplacement(MaterialPageRoute());
+    - replace existing first with given route.
+
+- MaterialPageRoute : replace entire screen with platform adaptive transition.
+    # constructor : " MaterialPageRoute({
+        required widgetBuilder builder,
+        RouteSettings? settings,
+        bool maintainState = true,
+        bool fllscreenDialog = false,
+        bool allowSnapShotting = true,
+    })
+
+    (1) builder => callback fn, accept routes, retrun widget tree.
+    (2) settings => used to pass data/metadata.
+    (3) maintainState => true, determines: to preserve previos route's data or not.
+    (4) fullscreenDialog => determines : to display route in fullscreen or not.
+    (5) allowSnapShotting => true, determines: route's scrrenshot or not.
+
+- syntax : Navigator.of(context).push(
+    context,
+    MaterialPageRoute(
+        builder:(context) => const NextPageName(data(if any)),
+        ),
+    );
+- Drawbacks of simple push & pop :
+    1. limited transitions => need to implement custom PageRoute objects.
+    2. loss of the widget's state if not managed correctly, 
+        require additional state management solutions like Provider, Bloc, or GetX.
+    3. can't share dynamic data.
+## solutions : 
+    1. dedicated state management : manage data and UI state 
+    2. custom PageRoute objects 
+    3. "onGenerateRoute" and "onUnknownRoute" to handle named routes efficiently.
+    4. "Navigator 2.0" (also known as the "Router" package) 
+        or AutoRoute to handle navigation in a more structured and customizable way.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+- Named routes :" Navigator.pushNamed()"
+
+    ** no longer recommended 
+
+    #example :
+    MaterialApp(
+
+    title: 'Named Routes Demo',
+
+    // Start the app with the "/" named route. In this case, the app starts
+    // on the FirstScreen widget.
+
+    initialRoute: '/',
+
+    routes: {
+         // When navigating to the "/" route, build the FirstScreen widget.
+         '/': (context) => const FirstScreen(),
+
+         // When navigating to the "/second" route, build the SecondScreen widget.
+         '/second': (context) => const SecondScreen(),
+        },
+    )
+    //When using initialRoute, don’t define a home property.
+      #syntax:
+        onPressed: () {
+        // Navigate to the second screen using a named route.
+        Navigator.pushNamed(context, '/second');
+        }
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+- onGenerateRoute: 
+    dynamically generate and return a new Route for the requested route.
+    1. takes a "RouteSettings" object as a parameter : constains -
+        (1) settings.name : route/screen name.
+        (2) settings.arguments : passed arguments
+    2. prefered to create another class or use it MaterialApp's arg, i.e., MaterialApp(onGenerateRoute:)
+    3. returns "Route<dynamic>"
+    4. in MaterialApp must define the custom class of routes in onGenerateRoute's argument.
+    5. use pushNamed('/screen', arguments: "--")

@@ -1,0 +1,19 @@
+# what's state?
+    - underlying data of a widget.
+    - which can change overtime.
+    - state management: to make ui interactive, have to manage state.
+        - low-level: The state is separated into a separate class (State) 
+          that can be updated independently of the widget using set-state.
+        - high-level: tools like provider, Getx,BLoC,etc used to update a specific data of a widget.
+
+# what's BLoC?
+    - BLoC : Business Logic Component
+    - state management solution.
+    - separate the business logic of your application from the presentation layer.
+    - which helps in making scalable, maintainable and robust app.
+
+
+# BLoc vs flutter_bloc:
+- BLoC: provides the logic of Bloc.
+- flutter_bloc: a package which builts upon Bloc, provides features like
+                blocBuilder,blocListener,etc which make state-management easy.

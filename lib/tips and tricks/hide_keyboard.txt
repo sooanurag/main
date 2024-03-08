@@ -1,0 +1,2 @@
+## hides/closes keyboard before poping the screen:
+    - SystemChannels.textInput.invokeMethod('TextInput.hide');

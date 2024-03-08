@@ -1,0 +1,21 @@
+Define:
+    - a StreamBuilder is a widget that helps you build your 
+      UI based on the data emitted by a Stream.
+    - streamController has two parts, sink and stream.
+    - sink is the input data, & stream is output data.
+    - if stream changes over time then the subscriber which is StreamBuilder will
+      get notified through snapshot.
+    * StreamBuilder widget listens to a Stream and rebuilds itself whenever new data arrives.
+    * if stream data changes then it rebuilds StreamBuilder, not build method or any setState calls.
+    - steps:
+        1. create a controller : StreamController comtrollerName = StreamController();
+        2. StreamBuilder(
+            (context, snapshot){
+                if(snapshot.hasData){}
+                if(snapshot.connectionState){}
+                if(snapshot.hasError){}
+            }
+        )
+        3. initialize sink : this sink data will be passed to snapshot, and if change this data
+           it will also effect steam.
+           i.e., controllerName.sink.add(var_name); 

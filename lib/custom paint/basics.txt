@@ -1,0 +1,101 @@
+## CustomPainter
+- used to define custom graphic.
+# steps:
+    1. create a class extending "CustomPainter" class.
+     - have to override "paint" and "shouldRepaint" methods.
+     - "Paint": define the custom drawing logic using the provided Canvas
+        * syntax: Paint paint = Paint()
+                    ..style = PaintStyle.fill;
+                    ..color = Colors.blue;
+        1. after creating a paint, create a canvas using rect or rrect,etc.
+            Rect rect = Rect.fromCenter(
+                center: offset() // provide an offset from where it starts drawing on canvas.
+                width: // width of canvas ex: size.width
+                height : // same
+            );
+            Rect rectOne = Rect.fromPoints(Offset(10,10), Offset(100,100));
+            - have create two rects, one for canvas one for path.
+        2. use "Path" to draw on canvas: "Path path = Path()..addRect(//rectName);"
+        3. to paint: "canvas.drawPath(pathName, paintName);"
+        ** to animate two rects:
+            - Path path = Path()..addRect(Rect.lerp(rectOne,rectTwo,animationController.value));
+     - "shouldRepaint": method is called whenever Flutter needs to determine 
+       whether to repaint the custom painter. If you return true, it will 
+       repaint; if you return false, it won't. You can optimize your painting 
+       logic based on changes in the custom painter's state.
+
+    2. CustomPaint(
+        painter: //define CustomPainter class you create
+        child: //Container
+        ) 
+       where,
+       CustomPaint widget is used to paint the custom graphics on its canvas.
+
+    * paint require two params: 
+        - canvas: The canvas on which to draw. You use methods like drawRect, drawCircle, etc., to perform the drawing.
+        - size: used for positioning/offset or defining size of drawing.
+
+# Rect : creates rectangle
+    - there main constructor to create rect:
+        1. Rect.fromLTRB(double left, double top, double right, double bottom);
+            - left/top: offset from left/top on canvas.
+            - right/bottom: height/width.
+        2. Rect.fromPoints(Offset a, Offset b);
+            - a: (x,y) offset on canvas.
+            - b: (h,w) size
+        3. Rect.fromCenter({double? x, double? y, double? width, double? height})
+
+# RRect: Rounded rectangle
+    - constructors:
+        1. RRect.fromRectAndRadius(rect,Radius.circular(value)); // have to provide a rect
+        2. RRect.fromRectXY(Rect rect, double radiusX, double radiusY);
+        3. RRect.fromLTRBR(double left, double top, double right, double bottom, Radius radius);
+        4. RRect.fromLTRBXY(double left, double top, double right, double bottom, Radius radiusX, Radius Y);
+            - create an eliptical border 
+            
+# Oval: Path()..addOval(rect) : create oval corner on rect.
+# Arc: Path()..addArc(rect,startAngle=0,endAngle=pi/2);
+
+# lineTo: used to draw a straight line on the canvas. 
+        - lineTo/moveTo starts from absolute point(0,0)
+    - void lineTo(double x, double y);
+    - Paint paint = Paint()
+      ..style = PaintStyle.stroke;
+      ..color = Colors.black;
+      ..strokeWidth = 2;
+
+      Starting point of the line
+      Offset startPoint = Offset(20.0, 30.0);
+
+      // Ending point of the line
+      Offset endPoint = Offset(120.0, 80.0);
+
+      // Drawing a line on the canvas
+      canvas.drawLine(startPoint, endPoint, paint);
+
+ # moveTo: used to add space on the line, moveTo(x,y): move the absolute point to (x,y) coordinates
+
+ # conicTo: used to draw a conic section
+    - syntax:
+        void conicTo(
+        double x1,
+        double y1,
+        double x2,
+        double y2,
+        double conicWeight,
+    );
+    where,
+    - x1, y1: The x and y coordinates of the control point for the beginning of the curve.
+    - x2, y2: The x and y coordinates of the control point for the end of the curve.
+    - conicWeight: A weight value that controls the shape of the conic. 
+      A value of 0.0 produces a quadratic Bézier segment, and a value of 1.0 produces a linear segment.
+
+# quadraticBezierTo: 
+    - void quadraticBezierTo(double x1, double y1, double x2, double y2);
+    - x1, y1: The x and y coordinates of the control point for the curve.
+    - x2, y2: The x and y coordinates of the ending point of the curve.
+
+
+
+
+    

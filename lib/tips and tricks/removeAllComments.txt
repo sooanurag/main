@@ -1,0 +1,6 @@
+## remove all comments 
+    1. cmd+f - opens find
+    2. type: "//.*"
+    3. click on "use regular expression" icon
+    4. toggle replace
+    5. click on replace all with empty

@@ -1,0 +1,33 @@
+Define:
+    - a cloud-hosted, NoSQL database.
+    - consists of documents and collections.
+    - documents : that contain fields mapping to values (key-value pairs, like json object).
+    - collection : store multiple documents (like array or json objects).
+    - supported data types : https://firebase.google.com/docs/firestore/manage-data/data-types?authuser=0
+    - Unlike a SQL database, there are no tables or rows. Instead, you store 
+      data in documents, which are organized into collections.
+    - can contain subcollections and nested objects
+    - Query : Add sorting, filtering, and limits to your queries or cursors to paginate your results.
+Setup:
+    - add dependency : cloud_firestore
+    - andoid > src > build.gradle > minSDkversion 21
+
+Use:
+    - FirebaseFirestore.instance
+    - .collection("collection_name").get(); returns QuerySnapshot => collection all instance
+    - get data using ".data()" on each instance.
+    - .collection("collection_name").doc("doc_id").get(); returns DocumentSnapshot
+    - use .data() directly.
+    - Add documents: instance.collection("col_nam").add(newDoc) => newDoc : Map<>
+    - add with custom id: instance.collection("col_nam").doc("you_id").set(Map_file);
+    - note: if collection name didnt exists then it will create by itself.
+    - Update: instance.collection("col_nam").doc("doc_id").update({"field" : "updated val"});
+    - Delete: instance.collection("col_nam").doc("doc_id").delete();
+    - Stream : instance.spanshot; return snapshot and update everytime a new QuerySnapshot added.
+    - length : snapshot.data!.docs.length
+    - to get doc id: take one map instance from docs > doc.id;
+    * filter & order: 
+        - .where("agr_name", is_arg: val).get()/.snapshot
+        - .orderBy("agr_name", accending/deccending : true/false)
+        * can use where() with orderBy().
+    

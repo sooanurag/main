@@ -1,0 +1,15 @@
+setup:
+    - only ios require:
+    - update: ios>runner>info.plist
+    - inside: <dic>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>Photo Library access required!</string>
+        <key>NSCameraUsageDescription</key>
+        <string>Camera access required!</string>
+        <key>NSMicrophoneUsageDescription</key>
+        <string>Microphone access required!</string>
+
+syntax:
+    - ImagePicker().pickImage(source: ImageSource.gallery);
+    - return a XFil?
+    - conversion to dart:io File : File myImageFile = File(XFile_name.path);

@@ -1,0 +1,91 @@
+## goRouter pacakge:
+    - url-based API for navigating between different screens (uses the Router API).
+    -  can define URL patterns, navigate using a URL, handle deep links, and a number of other navigation-related scenarios.
+    # Features:
+        1. Parsing path and query parameters using a template syntax (for example, "user/:id').
+        2. Displaying multiple screens for a destination (sub-routes).
+        3. Redirection support - you can re-route the user to a different URL based on application
+           state, for example to a sign-in when the user is not authenticated.
+        4. Support for multiple Navigators via ShellRoute - 
+           you can display an inner Navigator that displays its own pages based on 
+           the matched route. For example, to display a BottomNavigationBar 
+           that stays visible at the bottom of the screen.
+
+    # how to implement:
+        1. create a GoRoute() config file.
+        2. to use it:
+            - instead of MaterialApp use
+              MaterialApp.router(
+                routerConfig: goRouterConfigFile,
+              );
+        3. Navigation:
+            (1) context.go(path/routeName) / GoRouter.of(context).go(path/name): 
+                - replace the current stack of screens with the screens configured to be displayed for the destination route.
+                - used when config is done with child routes.
+            (2) context.pushNamed(/routeName): push route on top of the stack.
+
+    # config:
+    GoRouter(
+        routes:
+        [
+            // list of GoRoute objects
+            GoRoute(
+                name: routeName.route // handle using AppRoutes file
+                path: '/routeName'
+                builder: (context, state) => const ScreenName(),
+                routes: [
+                    // every route from delclared here will be pushed in stack not replacing the previos one (used with context.go())
+                ],
+            ),
+        ]
+    );
+
+    ## New version: costructor passing:
+        - there are three way: pathParameters, queryParameters, & extra.
+        1: pathParameters: Map<String,String> passing, when num of parameters are known.
+            - path: 'routePath/:param1/param2'
+            - use: builder: (context, state) => const ScreenName(
+                    fieldName1: state.pathParameters['param1'],
+                    fieldName2: state.pathParameters['param2'],
+                ),
+            - passing: context.goNamed("routeName", pathParameters: {'id1': param1, 'id2': param2});
+        
+        2: queryParameters: Map<String,String>, when num of params are not known.
+            - path: 'routePath' // fieldName definig not required.
+            - use: same as above:
+                builder: (context, state) => SampleWidget(
+                    id1: state.queryParameters['id1'],
+                    id2: state.queryParameters['id2'],
+                ),
+            - passing: context.goNamed("sample", queryParameters: {'id1': param1, 'id2': param2});
+
+        3. extra: used to pass models/objects, but have cast when using.
+            - GoRoute(
+                path: '/sample',
+                builder: (context, state) {
+                    Sample sample = state.extra as Sample; // 👈 casting is important
+                    return GoToScreen(object: sample);
+                },
+                ),
+            - passing: context.goNamed('routeName',extra: objectName);
+
+    # = OutDated/Depricated: parameter/constructor passing:
+        - "state in buider have the parameter and query params.
+        - to pass parameter:
+            1. define fields in the constructor of the screen class.
+            2. in GoRoute() config, 
+                update path : "/:fieldName1/:fieldName2"
+                builder: (context, state) => const ScreenName(
+                    fieldName1: state.params['fieldName1'],
+                    fieldName2: state.params['fieldName2'],
+                ),
+            3. navigating with:
+                context.go(
+                    routeNames.route1,
+                    params:{
+                        'fieldName1':value1,
+                        'fieldName2':valeu2
+                    },
+                );
+    ** check for adv : https://pub.dev/documentation/go_router/latest/topics/Configuration-topic.html
+

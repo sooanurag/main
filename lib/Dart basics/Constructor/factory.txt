@@ -1,0 +1,11 @@
+Factory Constructor:
+A factory constructor is also used to create instances, 
+but it provides more control over the process. 
+It can decide to reuse an existing instance, 
+return a different type of object, or perform 
+additional logic before creating an instance. 
+It's not required to create a new instance every 
+time it's called.
+
+syntax:
+factory constructor_name(){}

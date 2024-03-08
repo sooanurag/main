@@ -1,0 +1,55 @@
+* http:
+    - HyperText Transfer Protocol.
+    - defines how to fomat and transfer data over web servers.
+    - methods: operation that used to interact with the data on severs.
+        1. GET : used to retrive data.
+        2. POST : send to data to seerver, create new data in db.
+        3. PUT : update existing data.
+        4. DELETE : removes data.
+
+    POST /api/posts HTTP/1.1
+    Host: api.example.com
+    Content-Type: application/json
+    Authorization: Bearer {access_token}
+
+    {
+    "title": "New Post",
+    "content": "This is a new post content."
+    }
+
+* URL : Uniform Resource Loacator, specifies the location of a resource on the internet.
+    components:
+    - Scheme: Protocol, http/https
+    - Host: domain name,
+    - Port: oprional, port number.
+    - Path: path leads to specific resource.
+    - Query Parameters: Optional. Key-value pairs that provide additional data to the server. 
+      Separated by ? and &.
+
+* End-Point: part of the url that leads to specific data/resource of that doman/api.
+    ex: URL: https://api.example.com/users
+        Endpoint: /users
+        This endpoint fetches a list of users from the server.
+
+* Header: in context of API communication in flutter.
+    - piece of metadata included in the HTTP request or response.
+    - helps both the client and the server understand the context of the communication.
+    - are "key-value" pairs.
+    - used to communicate various aspects such as authentication credentials, 
+      content type, caching instructions, and more.
+    - use cases:
+        1. Authorization Header: final headers = {'Authorization': 'Bearer your_access_token_here',};
+        2. Content-Type Header: format of the data being sent in the request body.
+            final headers = {'Content-Type': 'application/json',};
+        ex : final response = await http.get(
+             Uri.parse('https://api.example.com/data'),
+             headers: headers,
+            );
+* Status code:
+    - 1xx Informational: The request has been received and the server is continuing to process it.
+    - 2xx Successful: The request was successfully received, understood, and accepted.
+    - 3xx Redirection: Further action is needed to complete the request, often involving redirection to a different URL.
+    - 4xx Client Error: The request contains bad syntax or cannot be fulfilled by the server due to the client's fault.
+    - 5xx Server Error: The server failed to fulfill a valid request due to an error on its part.
+    ex: 200=ok, 201=created, 400=bad request, 403=forbidden, 404=notfound, 500=serverEroor, etc
+

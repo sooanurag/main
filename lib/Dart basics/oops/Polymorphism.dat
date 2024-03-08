@@ -1,0 +1,7 @@
+important points:
+
+1. To acess base class methods only which are overriden in extended class: Upcasting
+    - BaseClass _identifier = ExtendedClass();
+        - creates an instance of ExtendedClass().
+        - can call methods or access properties defined in BaseClass.
+        - but if method in BaseClass is overriden then then the overriden method will be called. 

@@ -1,0 +1,22 @@
+Define:
+    - cloud based storage service.
+    - store and serve user-generated content such as images, videos, and more.
+
+features:
+    - storage intigrated with firebase Auth.
+    - each file assigned with a Url, can access directly using.
+    - and this url to store in firebase DB.
+    ~ client SDKs
+    
+implement:
+    - dependency: firebase_storage
+    - let say we have store images, import image_picker.
+    - root folder: FirebaseStorage.instance.ref()
+    - create a new folder in root directory: .child("folder_name")
+        i.e., FirebaseStorage.instance.ref().child("folder_name").child("inside_folder").child()...
+    - put file in folder: .putFile(//path) , return a uploadTask object, not url
+    - running uploadTask will return uploadTaskSnapshot, then store it in var
+    - url = var.ref.getDownloadURL();
+    ~ * progress bar for upload: using snapshotEvents and listener.
+    
+

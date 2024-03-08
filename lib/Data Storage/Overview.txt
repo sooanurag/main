@@ -1,0 +1,57 @@
+Data storage :
+    - Storing and managing data in order to retrive, and manipulate as needed.
+    - data can be user preferences, app settings, user-generated content, cached information, and more. 
+    - usage in flutter apps:
+        1. Persistence Across Sessions:
+            - to remember user preferences and settings even when the app is
+              closed or restarted.
+            - methods like Shared Preferences, SQLite, and Hive allows do so.
+        2. Offline data access: local data storage
+        3. Real-Time Data Synchronization:
+            - Collaborative apps or apps used across multiple devices need to
+              ensure that data changes are reflected in real-time for all users.
+            - Firebase and Firestore allows to do so.
+        4. Efficient Caching:
+            - Local storage solutions like Hive and file storage can be used to
+              cache data, reduce to fetch the same info repeatedly from servers.
+        5. Managing User-Generated Content: (images, videos.etc.)
+            - SQLite and Hive offer structured storage for user-generated content,
+              allowing efficient storage, retrieval, and management of user data.
+        6. Custom data handling: 
+            - combinations of different storage methods allows apps to tailor their
+              data management to their specific needs.
+
+
+Choosing factor : 
+    - consider factors such as the size and complexity of your data,
+      the need for real-time synchronization, performance requirements,
+      and whether the data is local or needs to be stored remotely.
+
+    - different data storage options:
+        1. Shared Preferences:
+            - Use case: Storing small amounts of key-value pairs.
+            - used for storing app settings and lightweight user preferences.
+            - not suitable for large amounts of data or complex data structures.
+
+        2. SQLite (sqflite package):
+            - Use Case: Local, serverless, embedded relational database for structured data.
+            - used for lists of items, notes, or other types of records.
+
+        3. Hive:
+            - Use Case: Fast local NoSQL database.
+            - rapid storage and retrieval of local data.
+        
+        4. Firebase Realtime Database and Firestore:
+            - Use Case: Cloud-based real-time and scalable databases.
+        
+        5. Network APIs (Dio, HTTP package):
+            - Use Case: Interacting with remote servers and APIs.
+            - can make HTTP requests and handle responses, etc.
+        
+        6. Provider and State Management Libraries:
+            - Use Case: Managing app-wide data and states.
+            - While not a direct storage option, state management libraries
+              like Provider, Riverpod, or Bloc can help manage app-wide data
+              and states in a structured and efficient way.
+            - These libraries can be used in conjunction with various storage
+              methods to manage the flow of data within your app.

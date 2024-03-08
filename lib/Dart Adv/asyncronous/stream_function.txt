@@ -1,0 +1,15 @@
+- a function which returns a stream of data.
+- generator function
+    - to declare: async*
+    - return type Stream<T>
+    - Yielding Values: Inside an async* function, you can use the "yield" keyword
+      to emit (or yield) values. These values are sent to the caller one at a time,
+      and the function can continue executing after each yield.
+    - inside the gen-function, can use await to pause executing.
+    - example:
+    Stream<int> countUpTo(int n) async* {
+    for (int i = 1; i <= n; i++) {
+        await Future.delayed(Duration(seconds: 1)); // Simulate an asynchronous delay
+        yield i; // Yield the current value
+    }
+    }

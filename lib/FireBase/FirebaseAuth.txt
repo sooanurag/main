@@ -1,0 +1,37 @@
+Firebase Authentication: 
+    - used authenticate and manage user identifiaction.
+    * after sign-in using this, login credential will automatically injected to local db
+      and after restarting the app will login by default with last credentials.
+    - features : Email auth, phone, google sign-in, facebook sign-in,etc.
+    - setps:
+        1. take a firebase instance: final instance = Firebase.instance;
+        2. using this with dot(.) operator can access variety of functions,
+           such as instance.createUserWithEmailAndPassword(), instance.signOut(),etc.
+        3. note: this is future methods, use await. and always wrap it with try catch
+           to handle FirebaseAuth Exception.
+
+FirebaseAuth Phone:
+    1. Android setup:
+        - in project settings > android > fill SHA1 & SHA256.
+    2. ios:
+        - reveal ios folder in finder > Runner.xcworkspace (opens in xcode)
+        - copy Reversed_client_ID : xcode > Runner > GoogleService-Info > REVERSED_CLIENT-ID > value
+        - go to: xcode > runnner > info tab > URL Types > click on add > paste on URL Schemes
+    3. constructor and args:
+        await FirebaseAuth.instance.verifyPhoneNumber(
+            phoneNumber: inputPhone,
+            codeSent: (verificationId, forceResendingToken) {},
+            verificationCompleted: (phoneAuthCredential) {},
+            verificationFailed: (error) {},
+            codeAutoRetrievalTimeout: (verificationId) {},
+            timeout: const Duration(seconds: 20),
+        );
+        where,
+            - codeSent : means code is sent, therefore in this body use navigator > otp verification.
+                         verificationId must be forwarded to verification page as its used to verify.
+    4. on verifypage: 
+        phoneAuthCredential credential =
+        PhoneAuthProvider.credential(verificationId: widget.verificationId, smsCode: otp);
+
+        use this credential to login, using instance.signinWithCredential(credential);
+        - must be in try-catch.

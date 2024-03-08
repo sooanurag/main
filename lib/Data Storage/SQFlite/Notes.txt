@@ -1,0 +1,35 @@
+Brief:
+    - Buit on top of SQLite (sql/structured data).
+    - Open source; RDBMS; Serverless; Local DB.
+    - RDBMS : can create relation between tables.
+    - Serverless: no network related config required as db stored localy.
+    - Local DB: created db stored at local storage (not on server).
+
+Features:
+    - Local Data Storage: access to data without relying on network connectivity.
+    - Structured Data: store data in tables with defined schema.
+    - Queries and Transactions: can perform complex queries on your local database;
+      use transactions to ensure data integrity when performing multiple database operations together.
+    - Asynchronous Operations: dont block main thread.
+    - CRUD Operations: create, read, update & delete.
+    - Miigration Support: When your app's data structure changes, sqflite supports schema
+      migrations, allowing you to update the database structure while preserving existing data.
+
+Steps:
+    1. Add dependencies : sqflite package, import path.dart (to use join) & path_provider package.
+    2. Create data model : encapsulate data in a object.
+    3. Open connection to db :
+        - get path: use getDatabasesPath() from sqflite package or use path_provider.
+        - join model path : use join($path, 'file')
+    4. Create Table: define a function which used in onCreate, which take parameters (db, version)
+       and return db.execute(
+        '''
+        CREATE TABLE table_name
+        (
+            //raw SQLite queries
+        )
+        '''
+       );
+    5. Define methods: Insert, Read/Query, Delete, & Update. *gothrough db_helper.dart
+
+

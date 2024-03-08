@@ -1,0 +1,37 @@
+Basics:
+    - add breakpoints(red marks in vsCode) on suspicious line of code.
+    - run in debug mode.
+    - when the breakpoint hits, execution will froze.
+    - enables to hover over properties to check current values or watch it on Watch tab.
+    - we can also see program flow by clicking on "Step over"
+
+
+* DevTools: For debugging and profiling apps, runs in a browser.
+    1. Source-Level Debugger:
+        - allows you to set breakpoints, step through code, inspect
+          variables, and understand the flow of your application's logic
+          while it's running.
+    
+    2. Widget Inspector:
+        - provides a visual representation of your app's widget tree.
+        - allows inspect widget at runtime.
+        - Use the "Select Widget" mode to click on widgets on the screen
+          and see their details in the widget tree.
+
+    3. Memory Profiler:
+        - used to analize memory usage.
+        - identifies memory leaks and helps you optimize memory.
+        - show memory allocation and deallocation patterns.
+
+    4. Timeline View and Tracing:
+        - "Performance" tab in DevTools.
+        - provides a timeline of events and actions that occurs on runtime.
+        - helps you identify performance bottlenecks and synchronization issues.
+        - Start recording a timeline while interacting with your app.
+        - Analyze the recorded timeline to identify performance bottlenecks,
+          rendering issues, and other events.
+
+    5. Logging View: "Logging" tab 
+        - allows you to view log messages.
+        - use the print() function to generate log messages.
+        - for understanding the behavior of your app, diagnosing issues, and tracking changes in state.

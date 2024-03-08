@@ -1,0 +1,34 @@
+# path_provider:
+    - to read and write files to disk.
+    - use case: download and persist some online data and use it across
+      multiple app sessions offline.
+    - requre "path_provider" plugin and "dart:io" library.
+    - doesn’t work with web apps.
+    - returns directory object that points to a loaction on user's device
+      that the os allocated for your app.
+    - supported platforms and path : https://pub.dev/packages/path_provider#supported-platforms-and-paths
+    - use cases : 
+        1. Documents directory : 
+            Directory appDocDir = await getApplicationDocumentsDirectory();
+
+        2. Support directory : manifest files
+            Directory appSupportDir = await getApplicationSupportDirectory();
+
+        3. Temporary directory : for current session data
+            Directory appTempDir = await getTemporaryDirectory();
+
+        4. Download directory : 
+            final Directory? downloadsDir = await getDownloadsDirectory();
+
+    - get path : appDocDir.path, appSupportDir.path, or appTempDir.path
+
+    - Example: 
+        Future<String> get _localPath async {
+            final directory = await getApplicationDocumentsDirectory();
+            return directory.path;
+        } // return a doc path
+
+        Future<File> get _localFile async {
+            final path = await _localPath;
+            return File('$path/counter.txt');
+        } // dart:io , store file to path.

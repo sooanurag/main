@@ -1,0 +1,24 @@
+## covariant keyword:
+    - used in the context of type annotations to indicate that a variable's 
+      type can be a more specific subtype than the one declared in the superclass.
+    - example:
+        class Box<T> {
+            T value;
+
+            Box(this.value);
+            }
+
+            class CovariantBox<T> extends Box<T> {
+            CovariantBox(T value) : super(value);
+
+            @override
+            void setValue(covariant int value) {
+                // The use of covariant allows using a more specific type in the subclass
+                print('Setting int value: $value');
+            }
+        }
+    # In this example, the covariant keyword allows the overridden method 
+      setValue in CovariantBox to accept a more specific type (int) than 
+      the one declared in the superclass (T).
+
+

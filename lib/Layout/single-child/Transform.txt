@@ -1,0 +1,37 @@
+Define:
+    - include rotating, scaling, translating (positioning), and skewing.
+    - Transform(
+        transform: /* Matrix4 object */,
+        alignment: /* Alignment */,
+        origin: /* Offset */,
+        child: /* Your child widget */,
+    )
+
+    - Transform constructors:
+        1. Transform.rotate : 
+            Transform.rotate(
+                angle: /* angle in radians */,
+                child: /* Your child widget */,
+            )
+        2. Transform.scale : 
+            Transform.scale(
+                scale: /* scale factor */,
+                child: /* Your child widget */,
+            )
+        3. Transform.translate : translation (positioning) transformation to its child.
+            Transform.translate(
+                offset: /* Offset */,
+                child: /* Your child widget */,
+            )
+    - Matrix4 methods: used default constructor of Transform(transform: //Matrix4.method).
+        1. Matrix4.identity() : no transformation is applied.
+        2. .rotationX(//angle), .rotationY(//angle), .rotationZ(//angle): rotation around the X, Y, or Z axis.
+        3. Matrix4.translationValues(dx, dy, dz) : translation/positioning in the X, Y, and Z directions.
+        4. Matrix4.diagonal3Values(scaleX, scaleY, scaleZ) : scaling along the X, Y, and Z axes.
+        5. Matrix4.skewX(sx) or Matrix4.skewY(sy) : skewing (shearing, like rhombus shape) along the X or Y axis.
+        6. matrix.inverted() : inverted
+
+
+
+
+

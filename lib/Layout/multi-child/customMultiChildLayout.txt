@@ -1,0 +1,52 @@
+## customMultiChildLayouy:
+- Example:
+SystemSoundsModel(
+      icon: AppIcons.hairDryer,
+      title: S.current.hairDryer,
+      isNew: true,
+      onTap: () {
+        // TODO: systemSounds > hairDryer button on-tap pending!
+      },
+    ),
+
+/// [CustomMultiChildLayout] custom delegate for grid layout
+///
+class SoundsLayoutDelegate extends MultiChildLayoutDelegate {
+  final List<SystemSoundsModel> sounds;
+  SoundsLayoutDelegate(this.sounds);
+  @override
+  void performLayout(Size size) {
+    Offset pos = Offset.zero;
+    Size childSize = const Size(104.5, 127);
+    double childScaleHandler = 0;
+    // Size childSize = Size(size.width * 0.2679, size.height * 0.206);
+    double crossAxisSpacing = (size.width - (childSize.width * 3)) / 2;
+    if (crossAxisSpacing < 20) {
+      childScaleHandler = 14;
+      crossAxisSpacing = crossAxisSpacing + 9;
+    }
+    double mainAxisSpacing = 20;
+    int index = 1;
+    for (var sound in sounds) {
+      layoutChild(
+          sound.title,
+          BoxConstraints(
+              maxWidth: childSize.width - childScaleHandler,
+              maxHeight: childSize.height));
+      positionChild(sound.title, pos);
+      if (index % 3 == 0) {
+        pos = Offset(
+            0, pos.dy + childSize.height - childScaleHandler + mainAxisSpacing);
+      } else {
+        pos += Offset(childSize.width + crossAxisSpacing, 0);
+      }
+
+      index++;
+    }
+  }
+
+  @override
+  bool shouldRelayout(covariant MultiChildLayoutDelegate oldDelegate) {
+    return true;
+  }
+}

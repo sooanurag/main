@@ -1,0 +1,11 @@
+## Sealed class:
+    - its a way to restrict inheritance hierarchy of a class.It's often used in conjunction
+      with enums or as a replacement for enums in situations where more flexibility is required.
+
+    - Restricting Inheritance: can extend sealed class within the same file as sealed class itself,
+      can't extend them from anywhere in your codebase.
+    
+    - Pattern Matching: if used with switch(MySealedClass obj){}, it force to
+      matech all the extended classes.
+    
+    - syntax: sealed class Identifier<T>

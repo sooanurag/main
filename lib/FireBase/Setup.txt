@@ -1,0 +1,29 @@
+pacakage name : android > app > build.gradle > application id
+
+using Firebase_cli : Command Line Interface
+
+    1. Install Firebase_cli
+    2. firebase login
+    3. dart pub global activate flutterfire_cli
+    4. inside project directory cmd : 
+    -    flutterfire configure
+
+    after using : 
+    - dart pub global deactivate flutterfire_cli
+
+    inside main :
+    - WidgetFlutterBinding.ensureInitialized();
+    - await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+
+    * SHA-1 : Secure Hash Algorithm 1
+        - used for security purposes like authentication.
+        - used in the process of configuring authentication methods, 
+          such as OAuth 2.0 or Firebase Authentication.
+        - SHA-256 is more secure and recommended.
+        - how to get SHA-1 fingerprint:
+            - install java sdk
+            - cd $PROJECTDIRECTORY
+            - keytool -list -v -keystore app/debug.keystore
+            - keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android

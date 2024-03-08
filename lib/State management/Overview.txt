@@ -1,0 +1,13 @@
+State: 
+    - underlying data of one/mutiple widgets at paticular point of time.
+    - Ephemeral state: if data is shared to single widget.
+    - app state: shared among multiple widgets.
+
+State management: 
+    - refers to controlling and handling the data that represents current state of the app.
+    - to manage state: data must be centralised or at root level of the widget tree.
+    - approaches:
+        - high level or loosly coupled: provider,bloc,riverpod,redux,etc
+        - low level or tightly coupled:
+            - changes in one part of the application can have a significant impact on other parts
+            - ex - setState(), InheritedWidgets(), InheritedNotifier(),etc.

@@ -1,0 +1,26 @@
+- Define:
+    * ValueNotifier and ValueListenableBuilder are classes used for managing and reacting to changes in values.
+    * part of foundation package not provider.
+    * provide basic value listening and updating capabilities.
+
+1. ValueNotifier : 
+    - syntax: ValueNotifier<T> var_name = ValueNotifier<T>(init_val);
+    - to get value : var_name.value;
+    - listen to change : 
+    var_name.addListener(
+        (){}
+        // above function will called whenever var_name.value changes.
+    )
+
+2. ValueListenableBuilder : inputs a ValueNotifier, rebuilds its child widget on chnages.
+    - syntax: ValueListenableBuilder(
+        valueListenable : myValueNotifier
+        builder : (context,value,child){
+            return Widget(
+                // rebuilds on change in myValueNotifier.value
+            );
+        }
+    )
+
+* note: ListenableProvider and ValueListenableProvider from the provider package, 
+        which provides a more powerful and flexible state management solution:

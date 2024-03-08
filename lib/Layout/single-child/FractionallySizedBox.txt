@@ -1,0 +1,14 @@
+Define:
+    - used to size its child to a fraction of the available space within its parent widget.
+    - take double vals : 0.0 - 1.0 (0% - 100%).
+    - FractionallySizedBox(
+        widthFactor: /* width fraction(0-1) */,
+        heightFactor: /* height fraction(0-1) */,
+        alignment: /* AlignmentGeometry */,
+        child: /* Your child widget */,
+    )
+    - this factors is the percent of size of the parent widget.
+    - if using it in a row/col, must wrap with flexible/expanded as
+      it give available to size factor to adjust in space. if not then
+      it may overlap with other widgets.
+    - if not use expanded : NEEDS-PAINT NEEDS-COMPOSITING-BITS-UPDATE error

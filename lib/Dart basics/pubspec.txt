@@ -1,0 +1,25 @@
+## pubspec yaml file
+    - a configuration file.
+    - used to define the metadata, dependencies, and other settings for the project
+    - It is written in YAML (YAML Ain't Markup Language) format. 
+    # basic structure:
+        name: your_project_name
+        description: A short description of your project
+        version: 1.0.0
+
+        environment:
+        sdk: ">=2.12.0 <3.0.0"  # Specifies the Dart SDK version
+
+        dependencies:
+        dependency_name: ^version_constraint
+        another_dependency: ^another_version_constraint
+
+        dev_dependencies:
+        dev_dependency_name: ^version_constraint
+        another_dev_dependency: ^another_version_constraint
+
+    where,
+        - name, description, version: provide metadata about your project.
+        - environment: Dart SDK version 
+        * dependencies: Lists the runtime dependencies for your project. Listed dependencies will shipped with build.
+        * dev_dependencies: Lists the development dependencies. These are packages that are needed during development but are not required for the runtime of your application.

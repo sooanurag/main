@@ -1,0 +1,13 @@
+Define:
+    - fit a child within its parent while ensuring that it's not distorted
+      by stretching or squishing.
+    - FittedBox(
+        fit: /* BoxFit */,
+        child: /* Your child widget */,
+    )
+    - fit: take Boxfit emuns, to specify the fit.
+        1. BoxFit.contain : fit within the parent while maintaining its aspect ratio, may not fill the entire parent.
+        2. BoxFit.cover : proportionally to cover the parent entirely, even overlap if bigger than parent.
+        3. Boxfit.fill : Strech to fill parent, dont overlap, but distorted.
+        4. Boxfit.fitHeight/fitWeight : fit along height/width.
+        

@@ -1,0 +1,11 @@
+to user BuildContext in async methods:
+    (1) move BuildContext user above await.
+    (2) if in state class:
+        if(mounted){
+            // user BuildContext
+        }
+    (3) outSide state class:
+        - pass BuildContext to that method.
+        - if(context.mounted){
+            // user BuildContext
+        }

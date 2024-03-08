@@ -1,0 +1,10 @@
+Defination:
+    - every widget is ultamately translated into renderObjects and painted on the screen.
+    - a fundamental part of the rendering pipeline and is responsible for handling the layout,
+      painting, and rendering of visual elements on the screen.
+    - RenderObjects are lower-level objects that handle the rendering and layout of visual elements on the screen.
+
+Use-cases:
+    - Custom render : used with complex layout or animation to be render in optimized manner.
+    - Contributing to the Flutter Framework: Develop custom rendering engines.
+    - Performance optimization.

@@ -1,0 +1,16 @@
+Defination:
+    - Building block or class which represents UI elements like layout, image, buttons,etc.
+    - tree structured: 
+        - from text() field, padding() to a container(), everything is widget.
+        - tree define how to compose and layout widgets on screen.
+    - immutable : 
+        - widgets are immutable means, once created there properties cant be changed.
+        - if properties changes or underlying data means its state changes.
+        - which will create a new instance of that widget in the tree and replace the old one.
+    - widget state: 
+        - have all the underlying data that can be changed over time.
+    - lifting state-up:
+        - if state is managed or stored at widget level, then have to rebuild whole tree to update the state.
+        - prefered practice is to lift the state at root level or outside the tree.
+        - so that state can accessed and updated from external source and if change occured then will automatically
+          notified to the shared state widgets.

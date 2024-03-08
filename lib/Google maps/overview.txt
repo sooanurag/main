@@ -1,0 +1,114 @@
+Setup:
+    1. import google_maps_flutter
+    2. setup google cloud platform:
+        - enable sdk (android & ios).
+    3. android setup in flutter:
+        - Andriod/app/build.gragle => defaultConfig{} => minSdkVersion = 20
+        - Andriod/app/src/AndriodManifest.xml => <application> ...inside
+            => <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="Your Api Key"/>
+    4. ios setup:
+        - ios/Runner/AppDelegate.swift
+            => import GoogleMaps
+            => inside bool{} => GMSServices.provideAPIKey("AIzaSyBksA1-S1IzB9eAsX229TOrqVgqOuQZpzI")
+
+implment : 
+    - snippit:
+    GoogleMap({
+        Key? key,
+        required this.onMapCreated,
+        this.initialCameraPosition = const CameraPosition(
+            target: LatLng(0, 0),
+            zoom: 10.0,
+        ),
+        this.mapType = MapType.normal,
+        this.myLocationEnabled = false,
+        this.myLocationButtonEnabled = true,
+        // Other properties...
+    })
+
+    - properties:
+
+        1. onMapCreated (required):
+        - Use it to store the GoogleMapController instance for interacting
+          with the map, like setting markers, adjusting camera position, etc.
+        - onMapCreated: (controller) {
+            _globalGoogleMapsControllerKey = controller;
+        }
+
+        2. initialCameraPosition:
+        - Specifies the initial position and zoom level.
+        - center the map on a specific location when loaded first time.
+        - initialCameraPosition: CameraPosition(
+            target: LatLng(37.7749, -122.4194), // Initial map position (San Francisco)
+            zoom: 12.0,
+          ),
+          where, "LatLng" stands for Latitude & Latitude, its a commom data structure used mapping
+          => LatLng(Latitude_val, Latitude_val);
+
+        3. mapType:
+        - Determines the style of the map, such as normal, satellite, terrain, hybrid, etc.
+        - mapType: MapType.satellite, //shows satellite view
+
+        4. myLocationEnabled: bool type
+        - import location
+        - myLocationEnabled: true, // Display user's location
+        - Shows the user's current location on the map using a blue dot.
+
+        5. myLocationButtonEnabled: bool
+        - Displays a button that, when clicked, centers the map on the user's current location.
+
+        6. marker:
+        - markers: Set<Marker>.of([
+            Marker(
+            markerId: MarkerId('marker_1'),
+            position: LatLng(37.7749, -122.4194),
+            infoWindow: InfoWindow(title: 'San Francisco'),
+            ),
+         ]),
+         where, set of Marker objects, its a set cz each marker must be unique.
+         *infoWindow : a box Displays(title : //title, snippet: //description), when clicked on marker.
+
+        7. polylines and polygons:
+        - import flutter_polyline_points
+        - similar to marker but used show routes,boundaries, and other shapes on the map.
+        - allow you to draw lines and polygons on the map.
+        - snippit : 
+            polylines: Set<Polyline>.of([
+                Polyline(
+                polylineId: PolylineId('route_1'),
+                points: [LatLng(37.7749, -122.4194), LatLng(37.7749, -123.4194)],
+                color: Colors.blue,
+                ),
+            ]),
+            where, every route must be unique; point(start_latlng, end_latlng)
+        
+        8. onCameraMoveStarted, onCameraMove, onCameraIdle:
+        - snippit:
+            GoogleMap(
+                onCameraMoveStarted: () {
+                    // Handle camera movement start
+                },
+                onCameraMove: (CameraPosition position) {
+                    // Handle camera movement
+                },
+                onCameraIdle: () {
+                    // Handle camera movement idle
+                },
+                // Other properties...
+            ) 
+        - Callbacks for camera movement events like like panning, zooming, and idle states.
+
+        9. zoomControlsEnabled and zoomGesturesEnabled:
+        - control zoom gesture and controls are enabled or not.
+        - customize user's interaction with the map's zoom level.
+        - zoomControlsEnabled: true, // Show zoom controls
+        - zoomGesturesEnabled: false, // Disable zoom gestures
+
+        10. rotateGesturesEnabled, scrollGesturesEnabled, tiltGesturesEnabled:
+        - rotateGesturesEnabled: false, // Disable rotate gestures
+        - scrollGesturesEnabled: true, // Enable scroll gestures
+        - tiltGesturesEnabled: true, // Enable tilt gestures
+
+
+

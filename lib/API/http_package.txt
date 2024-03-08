@@ -1,0 +1,62 @@
+Define: must be inside async fn.
+    - Future-based library for making HTTP requests.
+    - perform various network operations: GET, PUT, UPDATE & DELETE.
+    - take Uri as arg : Uniform Resource Identifier, Uri object is used to define the target endpoint.
+    - url to uri : Uri.parse("/ulr/api/");
+    - operations:
+        1. http.get(/Uri, header: //Optional);
+            - returns a instance
+            - this instance have propertise:
+                1. instance.body : return Raw json
+                2. instance.bodyBytes : the response body can contain various types of data,
+                   such as JSON, XML, HTML, images, or any other binary content. The 
+                   bodyBytes property gives you direct access to the binary representation 
+                   of this content.
+                3. instance.contentLength : provides the length (in bytes) of the response body's content.
+                4. instance.header : provide meta data about the response body.
+                5. instance.isRedirect : return true/false, client to fetch the requested resource from a different location (URL).
+                6. instance.persistentConnection: return true/false, tell connection still live or not.
+                7. instance.statusCode : returns statusCode.
+        
+        2. http.post(uri,body://requestbody{});
+        3. http.update(uri, bidy: //updadtedReqBody{});
+        4. http.delete(uri/endpointwithspecific_Id);
+
+* Individual and multiple requests: Persist connection
+    - this get, post, etc are individual requests, means they open connection for each request made.
+    - but this produce high latency if requests are made from same server.
+    - in order to improve efficiency by reusing the underlying network connection for 
+      multiple requests, rather than opening a new connection for each request, use
+      http.Client class.
+    - this Persist a connection for multiple get, post, etc requests.
+    - note : remember to dispose after using the connection.
+    - use try-catch with this.
+    ex: 
+        final _client = http.Client();
+
+        Future<void> fetchMultiData() async{
+            try{
+                final response1 = = await _client.get(Uri.parse('https://api.example.com/data1'));
+                final response2 = await _client.get(Uri.parse('https://api.example.com/data2'));
+
+                if(response1.statusCode == 200 && response2.statusCode==200){
+                    //print...
+                }
+                else{
+                    //print...
+                }
+            }
+            catch(e){print('Error: $e');}
+        }
+
+        @override
+        void dispose() {
+            // Close the client when the widget is disposed to release resources
+            _client.close();
+            super.dispose();
+        }
+
+* for flutter web, pending topic : 
+    1. "http.BaseClient" class, extent it make a custom client class.
+    2. Retrying requests : https://pub.dev/packages/http#retrying-requests
+    3. dio package : flexible and advance tool, can be used in both web and mobile.

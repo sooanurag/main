@@ -1,0 +1,49 @@
+*************
+1. dart extension:
+    - allows to add new functionality to a exsisting class.
+    - Syntax:
+        extension ExtensionName on ExtendedType {
+        // Define methods and properties here
+        }
+    where, "ExtendedType" - class you want to extension
+
+    ** scope diff between inheritance and extension:
+    - extension: they are more about adding utility methods or functionality to existing classes; cannot access private members.
+    - Inheritance: is a fundamental OOPs, allows a class to inherit properties and behaviors from another class
+
+2. [] subscript:
+    - Iterable<T> class is abstract class for List,set,queue and Map.
+    - but as List can get us element at index using square-braces subscript [], ex: listOne[5],
+      we can directly access elements using index and subscript over Iterable type.
+    - todo so, we can use extension on Iterable<T> class.
+    - syntax:
+        extension Subscript<T> on Iterable<T>{
+            T? operator [] (int index) => length>index? elementAt(index):null;
+        }
+      where,
+        "operator[]" implement subscript on all Iterables.
+    ## "operator" keyword:
+        - operator is a keyword used to overload or define the behavior of certain operators.
+        - When you declare a method using the operator keyword in a class, you are providing 
+          a custom implementation for a specific operator. For example, operator [](int index)
+          overloads the subscript ([]) operator.
+        - syntax: 
+            ReturnType operator OperatorSymbol(ParameterType parameter) {
+            // Custom implementation
+            }
+          where, 
+            T? - ReturnType
+            [] - OperatorSymbol
+        
+        - some common operators that can be overloaded include +, -, *, /, [], ==, <, >, and more.
+
+3. == operator override:
+    - when you want to define custom behavior for comparing instances of your class for equality and generating hash codes.
+    - used for comparing the equality of objects.
+    - @override
+      bool operator ==(Object other) =>
+      identical(this, other) || other is MyClass && other.value == value;
+    - hashcode: The hashCode method is used to generate a hash code for an object. 
+      It's important to override hashCode whenever you override the == operator to ensure consistency.
+      @override
+      int get hashCode => value.hashCode;

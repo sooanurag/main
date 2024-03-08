@@ -1,0 +1,48 @@
+Enumuration or enum : Data type
+    - represents a set of named values as symbolic constans.
+    - note: String values will be passed directly without quotes.
+    - define a finite set of possible values that a variable of that type can take.
+    - enum_name.values : give a list of all the values stored.
+
+    example: 
+        enum Category  {food, health, leisure, work}
+        //variable of type "Category" can take only these defined values.
+        Category var_one;
+
+    - all emun values are assigned with int indices (0 - n-1):
+    * Enum to int : 
+        Category myCategory = Category.work;
+        int categoryIndex = myCategory.index;
+        // categoryIndex = 3
+
+    * int to enum :
+        int myIndex = 0;
+        Category getCategory = Category.values[myIndex];
+        // enum.values[] property
+
+
+
+* add propertiesto enum/classes without effecting orignal class/enum :
+    - using "extension" methods.
+        extension CategoryExtension on Category {
+            String get displayCategory {
+                switch (this) {
+                    case Category.food:
+                        return "food";
+                    case Category.health:
+                        return "health";
+                    case Category.leisure:
+                        return "leisure";
+                    case Category.work:
+                        return "work";
+                }
+            }
+        }
+
+    void main() {
+        Status userCategory = Category.food;
+  
+        print("User Category: ${userCategory.displayCategory}");
+    }
+    // prints: food
+    // make human readable/understandable

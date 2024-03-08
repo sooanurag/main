@@ -1,0 +1,12 @@
+- two list mapper Function:
+
+extension TwoListMap<T> on List<T> {
+  List<Widget> twoListMap<U>(List<U> otherList, Widget Function(T, U) mapper) {
+    final length =
+        this.length > otherList.length ? otherList.length : this.length;
+    return List.generate(
+      length,
+      (index) => mapper(this[index], otherList[index]),
+    );
+  }
+}

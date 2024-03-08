@@ -1,0 +1,83 @@
+1. GridView.count: used where fixed number of columns, such as a gallery of images.
+    - a grid with a fixed number of columns.
+    -  GridView.count({
+        Key? key,
+        required int crossAxisCount,
+        double? mainAxisSpacing,
+        double? crossAxisSpacing,
+        EdgeInsetsGeometry? padding,
+        bool shrinkWrap = false,
+        ScrollPhysics? physics,
+        required List<Widget> children,
+        })
+    - crossAxisCount : no. of columns.
+    - mainAxisSpacing: Specifies the spacing between rows.
+    - crossAxisSpacing: Specifies the spacing between columns.
+    - padding: Provides padding around the entire grid.
+    - shrinkWrap: If true, the grid will wrap its content, which is useful when the grid is embedded in a scrolling view.
+    - physics: Defines the physics of the scroll behavior within the grid.
+
+2. GridView.extent : the number of columns adapts based on available space. 
+    means if maxCrossAxisExtent is given that its 3 columns can be add per 
+    row. with increasing maxCrossAxisExtent no. of col decreases.
+
+    - a grid with a fixed extent (maximum tile width and height).
+    - GridView.extent({
+        Key? key,
+        required double maxCrossAxisExtent,
+        double? mainAxisSpacing,
+        double? crossAxisSpacing,
+        EdgeInsetsGeometry? padding,
+        bool shrinkWrap = false,
+        ScrollPhysics? physics,
+        required List<Widget> children,
+        })
+    - maxCrossAxisExtent: Specifies the maximum width or height (extent) of each tile,
+      depending on the orientation of the grid.
+
+3. GridView.builder: when you want to create a grid with a large number of items
+    and generate them on-the-fly to save memory.
+
+    - creates a grid lazily using an IndexedWidgetBuilder function.
+    - GridView.builder({
+        Key? key,
+        required GridDelegate gridDelegate,
+        required IndexedWidgetBuilder itemBuilder,
+        int? itemCount,
+        ScrollController? controller,
+        })
+
+    - gridDelegate: 
+        * Specifies the delegate that controls the grid layout, such as 
+        SliverGridDelegateWithFixedCrossAxisCount.
+        * Its just a set of instructions which tell how to arrange each element on the grid with proper spacing.
+        * there two common set :
+            (1) Fixed no. of columns : SliverGridDelegateWithFixedCrossAxisCount.
+            (2) Varialble columns based on tile size : SliverGridDelegateWithMaxCrossAxisExtent.
+    
+    - itemBuilder: A callback function that takes an index and returns the widget at that index.
+        * Syntax : itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                        child: Center(
+                            child: Text('Item $index'),))}
+        * basically, have to return a tile in such a way that its content is dynamic and accessed from a list.
+    - itemCount: number of grid elements.
+    - controller: An optional controller for the scroll behavior.
+
+4. GridView.custom: basically its combination above grids, can use every feature in above grids.
+    - GridView.custom({
+        Key? key,
+        required SliverGridDelegate gridDelegate,
+        required SliverChildDelegate childrenDelegate,
+        ScrollController? controller,
+        })
+    - gridDelegate : 
+        (1) SliverGridDelegateWithFixedCrossAxisCount,
+        (2) SliverGridDelegateWithMaxCrossAxisExtent.
+    - childrenDelegate : 
+        (1) larger/infinite child (as GridView.builder) : SliverChildBuilderDelegate
+        (2) finite child (as GridView.count) : SliverChildListDelegate
+
+
+
+

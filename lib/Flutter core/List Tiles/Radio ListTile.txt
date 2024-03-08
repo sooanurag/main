@@ -1,0 +1,2 @@
+RadioListTile widget:
+    - make a single selection from a list of options. 

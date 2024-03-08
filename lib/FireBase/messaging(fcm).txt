@@ -1,0 +1,34 @@
+Define:
+    - Firebase Cloud Messaging (FCM)
+    - used to implement features like push notifications, in-app messaging, 
+      and real-time updates in mobile and web apps.
+    
+Setup:
+    - firebase_meassinging pacakage.
+    - initialize using requestPermission. not required in android.
+        - FirebaseMessaging.instance.requestPermission();
+        - return a AuthorizationStatus
+    - handle this in seperate class and file, and initialize in main() directly.
+
+Features:
+    - onBackgroundMessage():
+        - used to handle notifications when app is running in background.
+        - take an future handler function and passes a remoteMessage arg to it.
+        i.e., 
+            Firebase.onBackgroundMessage(backgroundMessageHandler);
+            // handler function must be at global level
+            Future<void> backgroundMessageHandler(RemoteMessage message) async {}
+            // RemoteMessage obj consists actual data of the notifications,
+            // we can handle that message using this backgroundMessageHandler() fn,
+            // which will called when a message is recived in background.
+
+    - onMessage():
+        - use to handle when app live running.
+        - as this is a stream, so we need to use a listener.
+        i.e.,
+            FirebaseMessaging.onMessage.listen(
+                (message){ // handle statement }
+            )
+        - can access using: 
+            1. message.notification.title
+            2. message.data["key"] : use key-value

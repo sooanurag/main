@@ -1,0 +1,10 @@
+Define:
+    - make a child widget of a Column or Row take up any available remaining
+      space along the main axis.
+    - Expanded(
+      flex: value,
+      child: Widget(),
+    ),
+
+    where, flex : defines a proportion/ratio that its child can take from the available space.
+    

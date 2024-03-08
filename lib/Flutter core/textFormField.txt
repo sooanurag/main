@@ -1,0 +1,16 @@
+* TextFormField() : 
+
+    -  FocusNode: switch focus to next TextFormField when click done/enter.
+        - Steps:
+        1. Create a focusNode for each TextFormField:
+            - final FocusNode _emailFocusNode = FocusNode();
+            - final FocusNode _passwordFocusNode = FocusNode();
+        2. inside TextFormField: put the created focusnode to correct fields to initialize them.
+            - TextFormField(
+                FocusNode : _emailFocusNode,
+            )
+        3. now in onFieldSubmitted : 
+            - (value){
+                _emailFocusNode.unfocus();
+                FocusScope.of(context).requestFocus(_passwordFocusNode);
+            }

@@ -1,0 +1,11 @@
+setup:
+    - only android require.
+    - andoid > app > src > main > AndroidManifest.xml
+    - copy: after first <activity/>
+        <activity
+    android:name="com.yalantis.ucrop.UCropActivity"
+    android:screenOrientation="portrait"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+syntax:
+    - ImageCropper().cropImage(sourcePath: pickedImageFile.path);

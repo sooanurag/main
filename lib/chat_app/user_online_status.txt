@@ -1,0 +1,50 @@
+- using WidgetsBindingObserver
+
+import 'package:flutter/material.dart';
+
+class PresenceDetector extends StatefulWidget {
+  final String userId; // The user's unique identifier
+  final DatabaseReference presenceRef; // Reference to the user's presence data in Firebase
+
+  PresenceDetector({required this.userId, required this.presenceRef});
+
+  @override
+  _PresenceDetectorState createState() => _PresenceDetectorState();
+}
+
+class _PresenceDetectorState extends State<PresenceDetector> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+    _updateUserStatus("online");
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _updateUserStatus("online");
+    } else {
+      _updateUserStatus("offline");
+    }
+  }
+
+  void _updateUserStatus(String status) {
+    widget.presenceRef.update({
+      'status': status,
+      'lastSeen': DateTime.now().toUtc().millisecondsSinceEpoch,
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    _updateUserStatus("offline"); // Update status when the widget is disposed (app closed)
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

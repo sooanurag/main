@@ -1,0 +1,46 @@
+## BLoc:
+ - it have a MyBlocClass<E,S>, with E:Event and S:State
+
+
+ # Event:
+    - is an action which can cause a change in the state.
+    - events are dispatched to Bloc which process & update state accordingly.
+    * best-practices: use a sealed-class or enum,that defines all the possible events that can occur in your application.
+    
+ - Event handler: inside bloc's constructor body, using on<Event_name>((event,emit){});
+
+
+
+# steps to create:
+    1. create an immutable abstract class:
+        - works as an base/abstract for our mutiple actions/events.
+        - its abstract cz we don't required to initialize it.
+    2. implement or extend the abstract class:
+        - add fields and properties which that event required.
+    3. create a class that holds on to the state/create state on event.
+    4. create bloc class with events_abstact as event and state_class, Bloc<event,state>.
+        - inside constructor function, we handle events.
+        - using "on()" function
+        - syntax:
+            on<LoadActionOne>(
+                (event,emit){
+                    //todo
+                }
+            );
+        - using event we can emit state.
+    5. to consume bloc as app-level state, wrap materialApp with;
+       BlocProvider(create: (_) => BlocName(),child: MaterialApp);
+       - which store the state in the BuildContext.
+       - retrive bloc using: context.read<BlocName>();
+       - add event: context.read<PersonsBloc>().add(new_event);
+    
+    6. blocBuilder<BlocClassName,stateHolderClass>(
+        buidWhen:(pervious,current){
+            // return true to rebuild
+        }
+        buider: (
+            (context,state){
+                return PlaceHolder();
+            }
+        ),
+    ); 

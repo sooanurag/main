@@ -1,0 +1,72 @@
+
+
+- accessing device features such as camera, location, contacts, storage, and more.
+- on Android, the dialogs will follow Material Design guidelines, and on iOS,
+  they will adhere to Cupertino design principles.
+
+- steps:
+    1. Importing packages:
+        (1) import 'package:flutter/cupertino.dart';
+            - create IOS style ui, when showing permission request dialogs.
+
+        (2) import 'package:flutter/services.dart';
+            - provides access to Flutter's platform-specific services.
+            - allows to use platform channels(ios & Android) to communicate with native code for various tasks (like request permission).
+        
+        (3) import 'package:permission_handler/permission_handler.dart';
+            - used to handle runtime permissions.
+            - provides an easy-to-use API : "requestPermission", "checkPermissionStatus", and "openAppSettings".
+
+    2. Checking Permission Status:
+        - First check whether the permission is already granted, denied, or undetermined.
+        - helps you avoid unnecessary permission requests
+        - example: 
+            Future<void> checkPermissionStatus() async {
+                PermissionStatus cameraStatus = await Permission.camera.status;
+                PermissionStatus locationStatus = await Permission.locationWhenInUse.status;
+            }
+            - "PermissionStatus", an enum that represents status. It can be granted, denied, undetermined, or restricted.
+            - "Permission.camera.status" and "Permission.locationWhenInUse.status" are asyn methods.
+            They return a "Future<PermissionStatus>" that indicates the status of the respective permission.
+
+    3. Requesting Permission:
+        - initiates the process of requesting the permission from the user.
+        - example:
+            Future<void> requestPermission() async {
+                PermissionStatus status = await Permission.camera.request();
+
+                if (status.isGranted) {
+                    // Permission granted, you can proceed with the action that requires the permission.
+                }
+                else {
+                    // Handle the case where the permission is denied or still undetermined.
+                }
+            }
+            - "Permission.camera.request()" initiates the permission request.
+            - "await Permission.camera.request()" waits for the user's response and returns a "Future<PermissionStatus>".
+
+    4. openAppSettings():
+        - If they initially denied a permission but later realize that the app functionality is limited due to the denied permission, 
+        they can manually grant the permission from the settings.
+
+    5. Configuration Files: Permission declaration. if not declared, app might crashes
+        (1) Info.plist (iOS):
+            - contains various configurations for your app, including permissions, 
+              app icons, supported device orientations, and more.
+            - Loacation : your_flutter_project/ios/Runner/Info.plist
+            - Info.plist permission keys : https://www.iosdev.recipes/info-plist/permissions/
+            - Declaration : using key-value pairs.
+                example : for cam access
+                    <key>NSCameraUsageDescription</key>
+                    <string>Text to prompt on dialog box.</string>
+    
+        (2) AndroidManifest.xml (Android):
+            - "AndroidManifest.xml" file to trigger permission requests at runtime.
+            - a permission that is not declared and is subsequently denied, it might lead to crashes.
+            - Loacation : your_flutter_project/android/app/src/main/AndroidManifest.xml
+            - Declaration : uses permission constants
+                <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+                - where "ACCESS_FINE_LOCATION" permission constant to request Loacation.
+                - find at : https://developer.android.com/reference/android/Manifest.permission
+
+

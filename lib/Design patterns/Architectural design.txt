@@ -1,0 +1,24 @@
+Defination:
+    - A blueprint for organizing and structuring software components.
+    - Purpose:
+        - help address recurring architectural concerns.
+        - code separation, maintainability, scalability, and extensibility. 
+
+Approaches:
+    - MVC, MVVM, Bloc Pattern, Clean arch, redux, VIPER, MVP, etc.
+
+Impementation in Flutter:
+    1. Which approache to choose:
+        - depends on project's requirements and complexity.
+        - if you're building a simple app, you may choose MVC or Provider for state management,
+          For more complex apps, consider BLoC or Clean Architecture.
+    2. use State management according to design pattern.
+    3. Document the architecture and component interactions.
+
+Architectural Methods:
+    - systematic approaches or processes used by software architects to plan, 
+      design, and manage the architecture of a software system.
+    - Approaches:
+        1. Rational Unified Process (RUP)
+        2. TOGAF (The Open Group Architecture Framework)
+        3. Agile Architecture: include methods, scrum & kanban. Scrum is widley used.

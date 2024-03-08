@@ -1,0 +1,67 @@
+# core-concepts to learn before Bloc
+
+# Streams:
+    - a sequence of asynchronous data.
+    - it's a pipe with a sink and source, where sink works as an input 
+      and source as output and the flow through them is called steam.
+    - represented using async* (async generator).
+
+    ## create stream:
+        Stream<int> countStream(int max) async* {
+            for(int i=0; i<max; i++){
+                Future.delayed(Duration(seconds = 1));
+                yeild i;
+            }
+        }
+        where,
+        * yeild keyword: A synchronous generator, which generates a sequence of values one step at a time.
+
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+        - same stream using controller:
+            final _intStream = StreamController();
+            // dispose required
+
+            addData() async {
+                for(int i=0; i<10; i++){
+                    Future.delayed(Duration(seconds = 1));
+                    _intStream.sink.add(i);
+                }
+            }
+
+            @override
+            void init(){
+                addData();
+            }
+
+            // get the steam using: _intStream.stream
+
+# Cubit:
+    - subset of Bloc, also an state management solution for small scale application.
+    - build on top of stream and blocBase.
+    - we can output new state using "emit" keyword.
+    ## create cubit which produce state on trigger:
+
+        // when creating a cubit, its requred an initail state
+        // but here we dont know the initial state therefore we maked it nullable and init with null
+
+        class NamesCubit extends Cubit<String?> {
+            NamesCubit() : super(null); // constructor, where "null" is the initial state.
+            
+            // in this example, we generate random state on events
+            void pickRandomName() => emit(names.getRandomElement());
+            // using "state" keyword we can get current state of the cubit
+
+            // can observe state change using on change
+            @override
+            void onChange(Change<String?> change) {
+                super.onChange(change);
+                debugPrint(change.currentState.toString());
+                debugPrint(change.nextState.toString());
+            }
+        }
+        // we can listen to this cubit either by using streamBuilder or blocBuilder
+
+    ## blocObserver : custom onChange.
+    ## addError: override and add custom errors.
+

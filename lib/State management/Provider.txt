@@ -1,0 +1,35 @@
+Provider:
+    - State management approache, which follows notifier and consumer model.
+    - a wrapper around InheritedWidget, which is a fundamental part of Flutter for sharing data across the widget tree.
+
+Features:
+    1. Simplified Allocation/Disposal of Resources:
+        - can create db connection once and share it across the app.
+        - provider ensure connection dispose when it no longer used.
+    
+    2. Lazy loading:
+        - means Resources created when it actually required.
+        - improve performance if a complex configuration object which expensive to create.
+    
+    3. Reduced Boilerplate:
+        - don't need to create a new class for every piece of shared data.
+    
+    4. Devtool Friendly: inspect the state of your application.
+
+main components:
+    1. ChangeNotifier
+    2. ChangeNotifierProvider(create: //req)
+    3. notifyListeners()
+    4. Consumer(builder: //req)
+
+# futureProvider
+# streamProvider
+# ChangeNotifierProvider.value(
+  value: MyModel(),
+  child: ...);
+  - .value constructor
+# proxyProvider
+# lazy parameter of provider
+# read values : https://pub.dev/packages/provider#reading-a-value
+# ListenableProvider
+# ValueListenableProvider

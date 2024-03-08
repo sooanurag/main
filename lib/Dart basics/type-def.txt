@@ -1,0 +1,20 @@
+## typedef
+
+    - used to create named fucntions, It allows you to assign a name to a function type signature.
+    - syntax: typedef FunctionType = ReturnType Function(ParameterType);
+    # use-case: typedef can make complex function types more readable, 
+                especially when dealing with functions as parameters or return values.
+    #  example:
+        typedef Operation = int Function(int, int);
+
+        int add(int a, int b) => a + b;
+        int subtract(int a, int b) => a - b;
+
+        int performOperation(int x, int y, Operation operation) {
+        return operation(x, y);
+        }
+
+        void main() {
+        print(performOperation(5, 3, add));      // Output: 8
+        print(performOperation(5, 3, subtract)); // Output: 2
+        }

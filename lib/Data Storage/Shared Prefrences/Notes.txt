@@ -1,0 +1,12 @@
+Shared Preferences package: 
+    - plugin wraps NSUserDefaults on iOS and SharedPreferences on Android,
+      providing a persistent store for simple data.
+    - store key-value pairs.
+    - support limited set of dataType : int, double, bool, String, List<String>.
+    - persist data across multiple seesions.
+    - stored data is not encryped.
+    - using "SharedPreferences.getInstance()" object:
+        1. Store data : .setString('key' , value)
+        2. get data : .getString('key')
+        3. remove data : .remove('key')
+        

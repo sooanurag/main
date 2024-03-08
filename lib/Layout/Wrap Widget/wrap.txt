@@ -1,0 +1,40 @@
+
+- arranges its children in multiple lines, either horizontally or vertically, or wraps them to the next line when there's not enough space.
+- used when no. of items are dynamic and also adapt to available space.
+- constructor:
+    Wrap({
+        Key? key,
+        Axis direction = Axis.horizontal,
+        MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+        MainAxisSize mainAxisSize = MainAxisSize.max,
+        CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.start,
+        TextDirection? textDirection,
+        VerticalDirection verticalDirection = VerticalDirection.down,
+        EdgeInsetsGeometry? spacing,
+        WrapAlignment alignment = WrapAlignment.start,
+        WrapAlignment runAlignment = WrapAlignment.start,
+        double runSpacing = 0.0,
+        List<Widget> children = const <Widget>[],
+    });
+    
+    - where :
+    1. direction : Axis along which childrens are placed.
+    2. mainAxisAlignment : alignment along main axis.
+    3. crossAxisAlignment : alignment along cross axis.
+    4. textDirection : reading direction (in case of text()).
+    5. verticalDirection : .down , determine where start new if exceed horizontal space.
+    6. spacing : space between adjacent children in the main axis.
+    7. alignment : along main axis (start,end,center,etc).
+    8. runAlignment : along cross axis (start,end,etc).
+    9. runSpacing : cross axis spacing between childrens.
+
+
+- GridView vs Wrap:
+
+    * Use "Wrap" when you have a variable number of items with varying sizes, 
+      and you want them to flow dynamically, wrapping when needed.
+
+    * Use "GridView" when you want to create a fixed grid with consistent rows
+      and columns, like a photo grid, where each cell should have a fixed size.
+
+    = we can use "Wrap" inside "GridView".

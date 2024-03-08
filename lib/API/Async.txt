@@ -1,0 +1,52 @@
+Define:
+    - Api calls involves waiting for network responses, which may take unpredictable time.
+    - allow you to perform tasks without blocking the main thread, as if not then ui will freez.
+    
+Key concepts:
+    - Future: represents a value that will be available in future.
+              ex: Future<int> , means it will return a int value in future.
+    - FutureBuilder : helps buid future ui.
+    - async : mark a function as asynchronous.
+    - await : pause the execution until awaited function completes, used inside async.
+    - Future Methods:
+        1. .then():
+            - attach a callback function (as arg) to be executed when a Future completes successfully.
+            - allows you to chain sequnce of operations that depend on the result of the Future.
+            - an error occurs during the execution of the Future, the error will propagate to the 
+              nearest .catchError() callback in the chain. This allows you to handle errors at
+              different points in your code.
+        
+        2. .catchError(): callback function
+            - also take a callback fn as an arg.
+            - in order handle error occurs in future calls, such as:
+                * Display an error message to the user.
+                * Log the error for debugging purposes.
+                * Trigger fallback behavior or retry mechanisms.
+                * Update the UI to indicate an error state.
+        
+        3. .whenComplete(): callback fn
+            - execute regardless of wheather the operation of future is successfully or not.
+            - useful for performing cleanup or finalization tasks.
+            - use cases:
+                * cleaning up temporary files or resources.
+                * Updating UI elements to indicate that an operation is complete.
+                * Logging or tracking the completion of asynchronous operations.
+        - ex:
+            uploadImage(imageFile).then((_) {
+            print('Upload completed successfully');
+            }).catchError((error) {
+            print('An error occurred: $error');
+            }).whenComplete(() {
+            print('Cleanup tasks are done');}) 
+
+FutureBuilder: used to build ui based on the state of future.
+    FutureBuilder<T>(
+        future: //display UI components based on the state of provided Future fn.
+        builder: (context, snapshot) {}
+    )
+    - where, "builder" called whenever the Future's state changes. It receives
+      a snapshot parameter that contains information about the current state of the Future.
+    - snapshot.connectionState == ConnectionState.waiting : return bool, show loading.
+    - snapshot.hasData / snapshot.hasError : return bool.
+    - <T>: generic type parameter that specifies the type of data that the
+           FutureBuilder is handling.

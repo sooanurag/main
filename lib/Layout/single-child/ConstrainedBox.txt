@@ -1,0 +1,15 @@
+Define:
+    - same as container, but we can set min/max height/width, so that if the contained 
+      widget exceed min width/height then container will expand to max wid/height.
+    - ConstrainedBox(
+  constraints: BoxConstraints(
+    minWidth: 100,
+    maxWidth: 200,
+    minHeight: 50,
+    maxHeight: 100,
+  ),
+  child: Container(
+    color: Colors.blue,
+    child: Text('ConstrainedBox Example'),
+  ),
+) 

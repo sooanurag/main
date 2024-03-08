@@ -1,0 +1,4 @@
+method  : tryParse
+
+double.tryParse('Hello') => null
+double.tryParse('12.99') => 12.99 //doubleValue

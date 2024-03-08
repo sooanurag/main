@@ -1,0 +1,28 @@
+MVVM : Model View View-model
+    - follows solid principles.
+
+View:
+    - UI part
+    - dont handle state inside.
+    - used to pass user-interactions on ui elements to view-model.
+    - dont write any logic code.
+    - can handle navigation,but not any logic behind navigation.
+
+Model: domain layer/data-access layer
+    - represents data.
+    -  dont handle or influence data.
+    - holds actual data that will be used in application development.
+    - logic part.
+
+view_model: medium
+    - provides data from model to view.
+    - can write state management methods to manage state in view.
+    - listener called ChangeNotifier that allows ViewModel to inform or update the View whenever the data get updated.
+
+folders:
+    - data => network,response and app_exception.dart file.
+    - view, model, view_model.
+    - utils
+    - resource or res : contains constants, colors, urls, widgets,etc.
+    - repo or repositories
+

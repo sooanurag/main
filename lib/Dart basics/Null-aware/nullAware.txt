@@ -1,0 +1,20 @@
+=> Used to handle null values. There are three:
+    1. '?.' : Null conditional operator
+        - checks right-side identifier is not-null then it'll call the right-side property.
+        - "name?.length" , if "name" is null then length will not be called.
+
+    2. '??' : Null Coalescing Operator
+        - always returns left side identifier/value util its null.
+        - if its null then it return right one.
+
+    3. '??=' : Assignment If Null Operator
+        - used to assign value to a variable.
+        - but if the variable is not null then assigned value will not be assigned.
+        - ex: 
+        1.  String? name;
+            name ??= "anurag";
+            print(name); // output => anurag
+
+        2.  String name = anurag;
+            name ??= "garuna";
+            print(name); // output=> anurag , i.e., remains unchanged
