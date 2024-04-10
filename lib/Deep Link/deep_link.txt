@@ -1,0 +1,97 @@
+*** read: https://codewithandrea.com/articles/flutter-deep-links/
+
+Deep link and App link:
+    - both are mechanisms used to direct users to specific content within a mobile app.
+///
++ Deep Link:
+    - URI schemes, such as myapp://path/to/content
+    - if app not installed: causes error
+    - commonly used for marketing campaigns, referral links, or sharing specific content within an app.
+///
++ App Link:
+    - URLs that serve as a bridge between web content and corresponding content within a mobile app.
+    - Implemented: using standard HTTP or HTTPS URLs associated with the app's domain.
+    - If the app is not installed, app links fall back to opening the corresponding web content.
+///
+* Branch.io & UniLink:
+    - Branch.io is a comprehensive platform for deep linking, attribution, 
+      and user engagement, while UniLinks is a Flutter package specifically 
+      designed to simplify deep linking implementation within Flutter apps.
+///
+* LINK Genration:
+    - Https://domainName.com/route_name
+    - if route have pathParameters, then Https://domainName.com/route_name/string_data
+///
+* AUTO VERIFY DOMAIN:
+    - dy default, we have to manually add domain in the app
+      settings in-order to navigate using the domain's link.
+    + have Host this files,for Android - ssetLinks.json file , Ios - apple-app-site-association file
+
+* SETUP:
+    + ANDROID:
+        1. Go to > android/app/src/main/AndroidManifest.xml and add inside <activity> ... </activity> :
+            -  add <meta data .... /> and <intent-filter> .... </intent-filter>
+            +  <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
+                - android:name="flutter_deeplinking_enabled": This attribute specifies the name of the metadata.
+                - android:value="true": specifies the value associated with the metadata.
+                In this case, setting it to "true" indicates that deep linking is enabled for the Flutter app.
+            +  <intent-filter android:autoVerify="true">
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data android:scheme="http" android:host="example.com" />
+                    <data android:scheme="https" />
+                </intent-filter>
+                - This <intent-filter> block in the AndroidManifest.xml file is used to specify 
+                how the Android system should handle incoming deep links for a particular scheme and host.
+                1. android:autoVerify="true": auto verify ownership of a link.
+                2. <action android:name="android.intent.action.VIEW" /> : 
+                    - action that the intent filter handles
+                    - in this case, indicating that the intent is a request to view data.
+                3. <category android:name="android.intent.category.BROWSABLE" /> :
+                    - indicates that the activity can be launched from a web browser.
+                4. <data android:scheme="http" android:host="example.com" />:
+                    - data type(s) the intent filter can accept
+                    - android:scheme="http": This attribute specifies the scheme of the URI, 
+                    in this case, "http". It indicates that the intent filter can handle HTTP URLs.
+                    - android:host="example.com": This attribute specifies the host part of the URI. 
+                    It indicates that the intent filter can handle URLs with the host "example.com".
+                5. <data android:scheme="https" />:
+                    - data type(s) the intent filter can accept
+                    - indicates that the intent filter can handle HTTPS URLs
+            + NOTE: the metadata tag "flutter_deeplinking_enabled" opts into Flutter’s default 
+                    deeplink handler. If you are using the third-party plugins, such as uni_links, 
+                    setting this metadata tag will break these plugins. Omit this metadata 
+                    tag if you prefer to use third-party plugins.
+        
+        2. Host assetLinks.json for auto-verify domain:
+            - requires a SHA256 and package name.
+            - go to https://developers.google.com/digital-asset-links/v1/getting-started#overview
+            - google's digital asset links website: to generate asset link.
+
+        * CMD to use link throung terminal:
+            "adb shell 'am start -a android.intent.action.VIEW \
+            -c android.intent.category.BROWSABLE \
+            -d "http://<web-domain>/details"' \
+            <package name>"
+
+    + IOS:
+        1. Fire up ios/Runner.xcworkspace in Xcode
+        2. Head to Runner > Signing & Capabilities > "+ Capability" > Associated Domains.
+        3. add your domain: "applinks:<domain.com>"
+            - can also add custom schemes: check above website
+        4. Hosting apple-app-site-association file:
+            - file tells the mobile browser which iOS application to open instead of the browser.
+            - check on website.
+        5. Test CMD:
+            - For HTTP/HTTPS links: xcrun simctl openurl booted https://yourDomain.com/path
+            - For custom scheme links: xcrun simctl openurl booted yourScheme://yourDomain.com/path
+
+///
+PENDING:
+    - Handling Deep Links with GoRouter in Flutter [website]
+    - External Deep Linking Packages: The app_links and uni_links packages
+      [if used then default flutter_handler we setup earlier didnt require!]
+    - Deferred Deep Links: bundles advanced marketing and analytics tools 
+      to help you track conversions, attributions, and user origins. 
+      The most popular solutions include branch.io, Adjust, AppsFlyer, and Kochava.
