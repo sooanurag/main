@@ -1,0 +1,11 @@
+# When working with a List/Grid view with large no. of items(ex:100 - 1000+):
+
+    + Optimation using ItemExtent/PrototypeItem:
+        - ItemExtent: by defining it, you tell each element has this
+          fixed height (if working in vertical dir), thus Flutter doesn't 
+          need to perform individual layout computations for each item.
+        
+        - PrototypeItem: pass the single widget of your list with data,
+          flutter computes its extent and use for rest of the data.
+          usecase: when you dont have the exact extent of the items
+          you are using.
