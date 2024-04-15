@@ -1,0 +1,4 @@
+# Specials
+
+1. "rm -rf .git" : detach git from the project
+2. "<shift> + <colon>:" : exit from merge

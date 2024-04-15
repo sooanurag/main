@@ -1,0 +1,7 @@
+# Git branch operations:
+    1. "git checkout branch_name" : to switch  respective branch
+    2. "git checkout -b branch_name" : create new branch
+    3. "git pull branch_name"
+        - if you're on same branch then "branch_name" not required
+        - if not, but want to get code from other branch to curr branch then, "git pull branch_name"
+
