@@ -1,3 +1,6 @@
+# Advanced concepts: https://sungod.hashnode.dev/advanced-flutter-bloc-techniques
+
+
 # what's state?
     - underlying data of a widget.
     - which can change overtime.

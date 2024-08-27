@@ -1,0 +1,12 @@
+double _getRatio() {
+    final double scrollHeight = deviceHeight * 0.35;
+    if (!_controller.hasClients) {
+      return 0;
+    }
+    if (_controller.hasClients && scrollHeight > _controller.position.pixels) {
+      final res = _controller.position.pixels / scrollHeight;
+      return res;
+    } else {
+      return 1;
+    }
+  }
