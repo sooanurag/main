@@ -1,0 +1,15 @@
+Introduction:
+    - Spring Boot is a project that is built on the top of the Spring Framework. 
+    It provides an easier and faster way to set up, configure, and run both simple 
+    and web-based applications.
+    
+    - RAD (Rapid Application Development)
+    - Spring Framework and Embedded Servers.
+
+# Features:
+    1. Spring Data: It simplifies data access from the relational and NoSQL databases.
+    2. Spring Batch: It provides powerful batch processing.
+    3. Spring Security: It is a security framework that provides robust security to applications.
+    4. Spring Social: It supports integration with social networking like LinkedIn.
+    5. Spring Integration: It is an implementation of Enterprise Integration Patterns. 
+       It facilitates integration with other enterprise applications using lightweight messaging and declarative adapters.

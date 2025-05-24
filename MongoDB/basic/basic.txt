@@ -1,0 +1,14 @@
+Structure:
+    Database > Collection > Documents
+
+    - Database : in Mongo, a NoSQL Data storage is called as Database, and has one or more callections.
+    - Collection : is List of documents => [], has one or more documents. ex: [ {}, {}, {}]
+    - Documents : is a json {'key','value'}
+
+    - Start/Stop : brew services start/stop mongodb-community@7.0 
+    - mongosh : open mongodb shell in terminl
+        - show dbs : lists all injected dbs
+        - use {dbName} : ex - 'use journalDb' > switched to db journalDb
+        - show collections : enlists exisiting collections in DB
+        - db.collectionName.find() : list of documents in the collection
+        - db.collectionName.deleteMany({}) : delete all documents/entries in the collection
