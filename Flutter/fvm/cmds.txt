@@ -1,0 +1,5 @@
+- fvm releases: lists all available flutter versions
+- fvm install [version]: installs the given flutter version
+- fvm install stable: installs current stable version
+- fvm list: list all installed SDKs
+- fvm flutter run: runs with current selected version [can directly run as well if setttings.json is config for fvm (auto configured)]

@@ -1,0 +1,4 @@
+ ./gradlew --refresh-dependencies           
+./gradlew clean
+./gradlew --stop
+rm -rf ~/.gradle/caches/  # WARNING: This deletes all Gradle caches

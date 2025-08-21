@@ -1,0 +1,5 @@
+npm install -g firebase-tools
+    - to user firebase cmds like: firebase login
+
+dart pub global activate flutterfire_cli
+    - activate firebase cli

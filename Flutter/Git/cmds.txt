@@ -1,0 +1,15 @@
+git config --global --list
+    - list config used for global terminal, ex: user.name, user.email
+    - for specifics: git config --global user.email
+    - To chnage<global>: git config --global user.email "your.new.email@example.com"
+
+git config --local --list
+    - for local config
+    - to see, project must initialized first
+
+git rm --cached <file_path>
+    - It removes the file from the Git index (staging area) but does not delete it from your local filesystem.
+    - You typically use this when:
+	•	You accidentally committed a file that should not be tracked (like env, config, *.log, or node_modules/).
+	•	You want Git to stop tracking a file but keep it locally.
+    •   Next, add the path to .gitignore file
