@@ -4,12 +4,13 @@
     - go to project root folder
     - then enter this cmd in terminal
 
-2. git remote add origin https://github.com/<username>/<repository>.git
+2. git remote add origin https://github.com/<username>/<repository>.git 
     - <username> : git username, ex: sooanurag
     - <repository> : name you repo
 
 3. git add .
 4. git commit -m "name_you_commit"
-5. git push -u origin master
+5. git remote add origin YOUR_REMOTE_REPO_URL
+6. git push -u origin master
     - If you're using a different branch name, replace "master" with the name of your branch.
-6. git push
+7. git push

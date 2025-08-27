@@ -13,3 +13,13 @@ git rm --cached <file_path>
 	•	You accidentally committed a file that should not be tracked (like env, config, *.log, or node_modules/).
 	•	You want Git to stop tracking a file but keep it locally.
     •   Next, add the path to .gitignore file
+
+create patch with tracked files:
+    - git diff > file_name.patch
+
+Path with all new/untracked files:
+    1. git add .
+    2. git diff --cached --binary > file_name.patch 
+
+Apply path:
+    - git apply file_name.patch
